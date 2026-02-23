@@ -1,10 +1,242 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Welcome to My GitHub Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rami Abusamen | Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --link: #0b57d0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 0 18px;
+    }
+
+    header {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    h1 { margin: 0 0 6px; font-size: 2.1rem; }
+    .headline { margin: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 1.2fr 0.8fr; }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    ul { margin: 10px 0 0 18px; }
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fafafa;
+      margin: 6px 6px 0 0;
+      font-size: 0.92rem;
+    }
+
+    .item { margin-top: 12px; }
+    .item-title { font-weight: 700; margin-bottom: 2px; }
+    .item-meta { color: var(--muted); font-size: 0.95rem; margin: 0; }
+    .item-desc { margin: 6px 0 0; }
+
+    .btnrow { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
+
 <body>
-<h1>Welcome to My Portfolio</h1>
-<p>This is my personal portfolio showcasing my work.</p>
+  <div class="container">
+    <header>
+      <h1>Rami Abusamen</h1>
+      <p class="headline">Computer Science Student • Java • Cybersecurity • Networking</p>
+
+      <div class="btnrow">
+        <a class="btn" href="https://github.com/Rabus15" target="_blank" rel="noopener">GitHub</a>
+        <!-- After you upload resume.pdf to the repo, this link will work -->
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        <a class="btn" href="mailto:ramiabusamen@gmail.com">Email</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT COLUMN -->
+      <main class="card">
+        <h2>About Me</h2>
+        <p>
+          Motivated and detail-oriented Computer Science student with a foundation in Java,
+          cybersecurity, and networking. Seeking internship opportunities in a dynamic
+          technology environment where academic knowledge and hands-on experience can be applied and expanded.
+        </p>
+
+        <h2 style="margin-top:18px;">Projects</h2>
+
+        <div class="item">
+          <div class="item-title">Secure Financial Report System (Capstone)</div>
+          <p class="item-meta">Encryption/Decryption • AES • DES • Public/Private Key Cryptography</p>
+          <p class="item-desc">
+            Implemented encryption/decryption using AES, DES, and public/private key cryptography in a secure data reporting application.
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="item-title">Hangman & Tic Tac Toe (Java)</div>
+          <p class="item-meta">Java • OOP • Console + GUI</p>
+          <p class="item-desc">
+            Built text-based and GUI versions to practice object-oriented programming and game logic.
+          </p>
+          <p class="item-desc">
+            <!-- Optional: replace with direct repo links if you have them -->
+            <a href="https://github.com/Rabus15" target="_blank" rel="noopener">View on GitHub</a>
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="item-title">Health Care Database System</div>
+          <p class="item-meta">ERDPlus • MySQL / phpMyAdmin • SQL</p>
+          <p class="item-desc">
+            Built a hospital database by creating normalized tables, relationships, and sample SQL queries.
+          </p>
+        </div>
+
+        <h2 style="margin-top:18px;">Experience</h2>
+
+        <div class="item">
+          <div class="item-title">Valet, BluValet — Burr Ridge, IL</div>
+          <p class="item-meta">Aug 2024 – Present</p>
+          <p class="item-desc">
+            Provided excellent customer service and managed vehicle flow efficiently in a high-paced environment.
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="item-title">Porter, Coda Motors — Burr Ridge, IL</div>
+          <p class="item-meta">Jan 2022 – Sep 2024</p>
+          <p class="item-desc">
+            Supported dealership operations and maintained vehicle organization with attention to detail.
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="item-title">Package Handler, UPS — Hodgkins, IL</div>
+          <p class="item-meta">Jun 2019 – Jan 2020</p>
+          <p class="item-desc">
+            Met productivity goals in a fast-paced environment while ensuring safety and teamwork.
+          </p>
+        </div>
+      </main>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="card">
+        <h2>Education</h2>
+
+        <div class="item">
+          <div class="item-title">Saint Xavier University — Chicago, IL</div>
+          <p class="item-meta">B.S. Computer Science, Minor in Management</p>
+          <p class="item-meta">GPA: 3.8 / 4.0 • Expected Graduation: May 2026</p>
+        </div>
+
+        <div class="item">
+          <div class="item-title">Moraine Valley Community College — Palos Hills, IL</div>
+          <p class="item-meta">Associate of Sciences • Aug 2019 – May 2022</p>
+        </div>
+
+        <h2 style="margin-top:18px;">Technical Skills</h2>
+        <div>
+          <span class="pill">Java (Intermediate)</span>
+          <span class="pill">SQL</span>
+          <span class="pill">Microsoft Excel</span>
+          <span class="pill">Cisco Packet Tracer</span>
+          <span class="pill">Unity</span>
+          <span class="pill">ERDPlus</span>
+          <span class="pill">KrypTool</span>
+          <span class="pill">Cryptool</span>
+          <span class="pill">IntelliJ</span>
+          <span class="pill">NetBeans</span>
+          <span class="pill">jGRASP</span>
+        </div>
+
+        <h2 style="margin-top:18px;">Networking</h2>
+        <ul>
+          <li>LAN/WAN setup</li>
+          <li>Routing</li>
+          <li>Cabling</li>
+          <li>Network diagnostics</li>
+        </ul>
+
+        <h2 style="margin-top:18px;">Cybersecurity</h2>
+        <ul>
+          <li>Encryption: AES, DES</li>
+          <li>Public/Private Keys</li>
+          <li>Digital Signatures</li>
+          <li>Threat detection (basic)</li>
+        </ul>
+
+        <h2 style="margin-top:18px;">Contact</h2>
+        <p style="margin:0;">
+          Email: <a href="mailto:ramiabusamen@gmail.com">ramiabusamen@gmail.com</a>
+        </p>
+        <!-- OPTIONAL: If you want your phone number public, uncomment below -->
+        <!-- <p style="margin:6px 0 0;">Phone: 708-673-9257</p> -->
+      </aside>
+    </div>
+
+    <p style="text-align:center; color:#6b7280; margin-top:18px;">
+      © <script>document.write(new Date().getFullYear())</script> Rami Abusamen
+    </p>
+  </div>
 </body>
-</html>
+</html> 
