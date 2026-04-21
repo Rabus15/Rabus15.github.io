@@ -1,249 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rami Abusamen | Portfolio</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #667eea, #764ba2);
-      --card-bg: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --pill-bg: #eef2ff;
+      --ink: #0f0f13;
+      --paper: #f5f3ee;
+      --accent: #1a3cff;
+      --accent2: #ff3c1a;
+      --muted: #6b6b78;
+      --card: #ffffff;
+      --border: #e0ddd6;
+      --pill-bg: #eaebff;
+      --pill-text: #1a3cff;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 20px;
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
     }
 
-    header {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    /* ── SIDEBAR ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 2.5rem;
-      color: var(--primary);
-    }
-
-    .headline {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .btnrow {
-      margin-top: 18px;
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--ink);
+      color: #f5f3ee;
+      padding: 48px 32px;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 36px;
+      overflow-y: auto;
+    }
+
+    .name-block h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #f5f3ee;
+    }
+
+    .name-block .accent-dot {
+      color: var(--accent);
+    }
+
+    .name-block .tagline {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: #9999aa;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #9999aa;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 6px 0;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #f5f3ee;
+      border-left-color: var(--accent);
+    }
+
+    .contact-block {
+      margin-top: auto;
+    }
+
+    .contact-block a {
+      display: block;
+      color: #9999aa;
+      font-size: 0.88rem;
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: color 0.2s;
+    }
+
+    .contact-block a:hover { color: #f5f3ee; }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
     }
 
     .btn {
-      background: var(--primary);
-      color: white;
+      display: inline-block;
+      text-align: center;
       padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 600;
+      border-radius: 6px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
       text-decoration: none;
+      letter-spacing: 0.04em;
       transition: 0.2s ease;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
+    .btn-primary {
+      background: var(--accent);
+      color: white;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
-      margin-top: 25px;
+    .btn-primary:hover {
+      background: #0028cc;
     }
 
-    @media (min-width: 900px) {
-      .grid {
-        grid-template-columns: 1.3fr 0.7fr;
-      }
+    .btn-outline {
+      border: 1.5px solid #444455;
+      color: #c0c0cc;
+      background: transparent;
     }
 
-    .card {
-      background: var(--card-bg);
-      padding: 22px;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    .btn-outline:hover {
+      border-color: #f5f3ee;
+      color: #f5f3ee;
     }
 
-    h2 {
-      margin-top: 0;
-      color: var(--primary);
+    /* ── MAIN CONTENT ── */
+    main {
+      padding: 60px 64px;
+      max-width: 860px;
     }
 
-    .item {
-      margin-top: 15px;
+    section {
+      margin-bottom: 72px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.5s ease forwards;
     }
 
-    .item-title {
-      font-weight: bold;
+    section:nth-child(1) { animation-delay: 0.05s; }
+    section:nth-child(2) { animation-delay: 0.15s; }
+    section:nth-child(3) { animation-delay: 0.25s; }
+    section:nth-child(4) { animation-delay: 0.35s; }
+    section:nth-child(5) { animation-delay: 0.45s; }
+    section:nth-child(6) { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .item-meta {
-      font-size: 0.95rem;
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* About */
+    .about-text {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: #3a3a44;
+      max-width: 620px;
+      line-height: 1.8;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+      transform: translateY(-2px);
+    }
+
+    .project-card.featured::before {
+      content: 'FEATURED';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: var(--pill-bg);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      font-size: 0.83rem;
       color: var(--muted);
+      margin-bottom: 10px;
     }
 
-    .item-desc {
+    .project-desc {
+      font-size: 0.95rem;
+      color: #3a3a44;
+      line-height: 1.7;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 1px;
+      transition: opacity 0.2s;
+    }
+
+    .project-link:hover { opacity: 0.7; }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      background: var(--pill-bg);
+      color: var(--pill-text);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* Experience */
+    .exp-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .exp-date {
+      font-size: 0.83rem;
+      color: var(--muted);
+      white-space: nowrap;
+      font-style: italic;
+    }
+
+    .exp-company {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .exp-bullets {
+      padding-left: 18px;
+    }
+
+    .exp-bullets li {
+      font-size: 0.93rem;
+      color: #3a3a44;
+      margin-bottom: 6px;
+      line-height: 1.65;
+    }
+
+    /* Education */
+    .edu-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-item:last-child { border-bottom: none; }
+
+    .edu-school {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .edu-meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .gpa-badge {
+      display: inline-block;
+      background: #e8faf0;
+      color: #1a7a45;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
       margin-top: 6px;
     }
 
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .skill-group-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
     .pill {
-      display: inline-block;
+      font-size: 0.8rem;
       background: var(--pill-bg);
-      color: var(--primary);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin: 6px 6px 0 0;
-      font-size: 0.9rem;
+      color: var(--pill-text);
+      padding: 5px 11px;
+      border-radius: 4px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
     }
 
-    ul {
-      margin: 10px 0 0 18px;
+    /* Coursework */
+    .course-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
+    .course-tag {
+      font-size: 0.83rem;
+      background: #f0f0f5;
+      color: #3a3a55;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Footer */
     footer {
-      text-align: center;
-      margin-top: 25px;
-      color: white;
-      font-size: 0.9rem;
+      padding: 32px 64px;
+      border-top: 1px solid var(--border);
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-top: 0;
     }
 
+    /* Responsive */
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+      }
+
+      main {
+        padding: 40px 24px;
+      }
+
+      footer { padding: 24px; }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <div class="layout">
 
-    <header>
-      <h1>Rami Abusamen</h1>
-      <p class="headline">Computer Science Student • Java • Cybersecurity • Networking</p>
-
-      <div class="btnrow">
-        <a class="btn" href="https://github.com/Rabus15" target="_blank">GitHub</a>
-        <a class="btn" href="resume.pdf" target="_blank">Resume (PDF)</a>
-        <a class="btn" href="mailto:ramiabusamen@gmail.com">Email</a>
+    <!-- ── SIDEBAR ── -->
+    <aside>
+      <div class="name-block">
+        <h1>Rami<br>Abusamen<span class="accent-dot">.</span></h1>
+        <p class="tagline">CS Student · Chicago, IL</p>
       </div>
-    </header>
 
-    <div class="grid">
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+      </nav>
 
-      <!-- LEFT SIDE -->
-      <div class="card">
-        <h2>About Me</h2>
-        <p>
-          Motivated and detail-oriented Computer Science student with a foundation in Java,
-          cybersecurity, and networking. Seeking internship opportunities in a dynamic
-          technology environment where academic knowledge and hands-on experience can be applied and expanded.
+      <div class="contact-block">
+        <a href="mailto:ramiabusamen@gmail.com">ramiabusamen@gmail.com</a>
+        <a href="tel:7086739257">708-673-9257</a>
+        <a href="https://github.com/Rabus15" target="_blank">github.com/Rabus15</a>
+        <div class="cta-buttons">
+          <a class="btn btn-primary" href="resume.pdf" target="_blank">Download Resume</a>
+          <a class="btn btn-outline" href="https://github.com/Rabus15" target="_blank">GitHub Profile</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-label">About Me</div>
+        <p class="about-text">
+          Motivated and detail-oriented Computer Science student with a strong foundation in Java, cybersecurity, and networking. I build full-stack applications, design relational databases, and explore security concepts through hands-on projects. Seeking internship opportunities where I can apply and grow my technical skills in a real-world environment.
         </p>
+      </section>
 
-        <h2>Projects</h2>
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-label">Projects</div>
+        <div class="projects-grid">
 
-        <div class="item">
-          <div class="item-title">Secure Financial Report System (Capstone)</div>
-          <div class="item-meta">AES • DES • Public/Private Key Cryptography</div>
-          <div class="item-desc">
-            Implemented encryption/decryption in a secure data reporting application.
+          <div class="project-card featured">
+            <div class="project-title">Stylix — Fashion Marketplace Platform</div>
+            <div class="project-meta">Full-Stack Web Application · Project Manager & Developer</div>
+            <p class="project-desc">
+              Engineered the core modules of a full-stack fashion marketplace, enabling users to create and browse fashion projects with database-backed persistence. Built a real-time messaging system using JavaScript, Node.js, and JSON-based REST APIs backed by SQL queries. Led the team as Project Manager across all development phases — successfully deployed and demoed to faculty, earning recognition as one of the top projects in the class.
+            </p>
+            <div class="tech-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">SQL</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">HTML/CSS</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Heart Failure Risk Assessment Dashboard</div>
+            <div class="project-meta">Tableau · Data Analysis · Healthcare</div>
+            <p class="project-desc">
+              Built an interactive dashboard visualizing demographics, clinical indicators, and mortality outcomes across a real clinical dataset of 299 patients. Authored a strategic report on the financial impact of readmissions under Medicare's HRRP.
+            </p>
+            <a class="project-link" href="#" target="_blank">View Dashboard →</a>
+            <div class="tech-tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">Data Analysis</span>
+              <span class="tag">Healthcare Analytics</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Secure Financial Report System</div>
+            <div class="project-meta">Capstone Project · Cybersecurity</div>
+            <p class="project-desc">
+              Investigated a simulated financial data breach by applying symmetric (AES, DES) and asymmetric (public/private key) encryption alongside hash-based integrity verification using KrypTool and CrypTool. Delivered a full security analysis that restored and validated the integrity of a compromised financial report, demonstrating mastery of multiple cryptographic methods across a real-world threat scenario.
+            </p>
+            <div class="tech-tags">
+              <span class="tag">AES / DES</span>
+              <span class="tag">Public/Private Keys</span>
+              <span class="tag">KrypTool</span>
+              <span class="tag">CrypTool</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Healthcare Database System</div>
+            <div class="project-meta">Database Design · MySQL · ERDPlus</div>
+            <p class="project-desc">
+              Designed and implemented a fully normalized relational database for a hospital system comprising 10+ tables modeling patients, staff, departments, and medical records. Authored complex multi-table SQL queries enabling advanced reporting while maintaining full referential integrity.
+            </p>
+            <div class="tech-tags">
+              <span class="tag">MySQL</span>
+              <span class="tag">SQL</span>
+              <span class="tag">ERDPlus</span>
+              <span class="tag">phpMyAdmin</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Hangman &amp; Tic Tac Toe</div>
+            <div class="project-meta">Java · OOP · Console + GUI</div>
+            <p class="project-desc">
+              Developed text-based and GUI versions applying OOP principles and game logic to build fully functional, playable applications.
+            </p>
+            <a class="project-link" href="https://github.com/Rabus15" target="_blank">View on GitHub →</a>
+            <div class="tech-tags">
+              <span class="tag">Java</span>
+              <span class="tag">OOP</span>
+              <span class="tag">GUI</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="section-label">Experience</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Valet</div>
+            <div class="exp-date">Aug 2024 – Present</div>
+          </div>
+          <div class="exp-company">BluValet · Burr Ridge, IL</div>
+          <ul class="exp-bullets">
+            <li>Delivered professional customer service for 20+ guests per shift while managing high-volume vehicle flow, assigning vehicle zones, tracking keys, and coordinating handoffs — reducing average guest wait times by ~30%.</li>
+            <li>Onboarded and mentored 5+ new hires on lot management, guest interaction standards, and shift protocols; managed shift schedules and rotations to ensure consistent service quality.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Porter &amp; Sales Associate</div>
+            <div class="exp-date">Jan 2022 – Sep 2024</div>
+          </div>
+          <div class="exp-company">Coda Motors · Burr Ridge, IL</div>
+          <ul class="exp-bullets">
+            <li>Managed and organized a fleet of 100+ vehicles across dealership lots, improving inventory visibility and reducing vehicle retrieval time by ~15%.</li>
+            <li>Conducted outbound cold calls and customer follow-ups; coordinated 10+ maintenance requests per month with local mechanic partners.</li>
+            <li>Trained 2–3 coworkers on the Affinitiv CRM system, resulting in 6+ additional customer conversions per week across the team.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Package Handler</div>
+            <div class="exp-date">Jun 2019 – Jan 2020</div>
+          </div>
+          <div class="exp-company">UPS · Hodgkins, IL</div>
+          <ul class="exp-bullets">
+            <li>Processed and sorted 200+ packages per shift in a high-volume warehouse while consistently meeting productivity and safety targets.</li>
+            <li>Informally led fellow associates during shifts, resolving workflow bottlenecks in real time.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education">
+        <div class="section-label">Education</div>
+
+        <div class="edu-item">
+          <div class="edu-school">Saint Xavier University — Chicago, IL</div>
+          <div class="edu-meta">Bachelor of Science in Computer Science, Minor in Management</div>
+          <div class="edu-meta">Expected May 2026</div>
+          <div class="gpa-badge">GPA: 3.8 / 4.0</div>
+          <div style="margin-top: 14px;">
+            <div class="skill-group-title" style="margin-bottom:8px;">Relevant Coursework</div>
+            <div class="course-list">
+              <span class="course-tag">Java Programming I &amp; II</span>
+              <span class="course-tag">Data Structures &amp; Algorithms</span>
+              <span class="course-tag">Intro to Database Management</span>
+              <span class="course-tag">Operating Systems</span>
+              <span class="course-tag">Software Engineering</span>
+              <span class="course-tag">Intro to Networking</span>
+              <span class="course-tag">Intro to Cybersecurity</span>
+              <span class="course-tag">Computer Systems &amp; Organization</span>
+            </div>
           </div>
         </div>
 
-        <div class="item">
-          <div class="item-title">Hangman & Tic Tac Toe (Java)</div>
-          <div class="item-meta">Java • OOP • Console + GUI</div>
-          <div class="item-desc">
-            Built text-based and GUI versions to strengthen object-oriented programming skills.
+        <div class="edu-item">
+          <div class="edu-school">Moraine Valley Community College — Palos Hills, IL</div>
+          <div class="edu-meta">Associate of Sciences</div>
+          <div class="edu-meta">Aug 2019 – May 2022</div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-label">Technical Skills</div>
+        <div class="skills-grid">
+
+          <div class="skill-group">
+            <div class="skill-group-title">Languages</div>
+            <div class="skill-pills">
+              <span class="pill">Java</span>
+              <span class="pill">SQL</span>
+              <span class="pill">Python</span>
+              <span class="pill">HTML</span>
+              <span class="pill">CSS</span>
+              <span class="pill">JavaScript</span>
+            </div>
           </div>
-        </div>
 
-        <div class="item">
-          <div class="item-title">Health Care Database System</div>
-          <div class="item-meta">ERDPlus • MySQL • SQL Queries</div>
-          <div class="item-desc">
-            Designed normalized tables, relationships, and implemented sample queries.
+          <div class="skill-group">
+            <div class="skill-group-title">Tools &amp; IDEs</div>
+            <div class="skill-pills">
+              <span class="pill">IntelliJ</span>
+              <span class="pill">NetBeans</span>
+              <span class="pill">jGRASP</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">Tableau</span>
+              <span class="pill">ERDPlus</span>
+              <span class="pill">GitHub</span>
+              <span class="pill">Microsoft Excel</span>
+            </div>
           </div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Cybersecurity</div>
+            <div class="skill-pills">
+              <span class="pill">AES / DES</span>
+              <span class="pill">Public/Private Keys</span>
+              <span class="pill">Digital Signatures</span>
+              <span class="pill">KrypTool</span>
+              <span class="pill">CrypTool</span>
+              <span class="pill">Threat Detection</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-title">Networking</div>
+            <div class="skill-pills">
+              <span class="pill">LAN/WAN Setup</span>
+              <span class="pill">Routing</span>
+              <span class="pill">Cabling</span>
+              <span class="pill">Cisco Packet Tracer</span>
+              <span class="pill">Network Diagnostics</span>
+            </div>
+          </div>
+
         </div>
+      </section>
 
-        <h2>Experience</h2>
-
-        <div class="item">
-          <div class="item-title">Valet — BluValet</div>
-          <div class="item-meta">Aug 2024 – Present</div>
-          <div class="item-desc">Managed vehicle flow and delivered strong customer service.</div>
-        </div>
-
-        <div class="item">
-          <div class="item-title">Porter — Coda Motors</div>
-          <div class="item-meta">Jan 2022 – Sep 2024</div>
-          <div class="item-desc">Supported dealership operations and organization.</div>
-        </div>
-
-      </div>
-
-      <!-- RIGHT SIDE -->
-      <div class="card">
-        <h2>Education</h2>
-        <div class="item">
-          <div class="item-title">Saint Xavier University</div>
-          <div class="item-meta">B.S. Computer Science • Minor in Management</div>
-          <div class="item-meta">GPA: 3.8 / 4.0 • May 2026</div>
-        </div>
-
-        <div class="item">
-          <div class="item-title">Moraine Valley Community College</div>
-          <div class="item-meta">Associate of Sciences • 2019 – 2022</div>
-        </div>
-
-        <h2>Technical Skills</h2>
-        <span class="pill">Java (Intermediate)</span>
-        <span class="pill">SQL</span>
-        <span class="pill">Microsoft Excel</span>
-        <span class="pill">Cisco Packet Tracer</span>
-        <span class="pill">Unity</span>
-        <span class="pill">ERDPlus</span>
-        <span class="pill">IntelliJ</span>
-        <span class="pill">NetBeans</span>
-
-        <h2 style="margin-top:20px;">Cybersecurity</h2>
-        <ul>
-          <li>AES / DES Encryption</li>
-          <li>Public & Private Keys</li>
-          <li>Digital Signatures</li>
-        </ul>
-
-      </div>
-
-    </div>
-
-    <footer>
-      © <script>document.write(new Date().getFullYear())</script> Rami Abusamen
-    </footer>
-
+    </main>
   </div>
+
+  <footer>
+    © <script>document.write(new Date().getFullYear())</script> Rami Abusamen · Built with HTML/CSS · Hosted on GitHub Pages
+  </footer>
+
 </body>
 </html>
